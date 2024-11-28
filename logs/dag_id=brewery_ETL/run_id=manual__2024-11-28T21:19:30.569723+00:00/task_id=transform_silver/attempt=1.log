@@ -1,0 +1,51 @@
+[2024-11-28T21:22:21.219+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-11-28T21:22:21.235+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: brewery_ETL.transform_silver manual__2024-11-28T21:19:30.569723+00:00 [queued]>
+[2024-11-28T21:22:21.243+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: brewery_ETL.transform_silver manual__2024-11-28T21:19:30.569723+00:00 [queued]>
+[2024-11-28T21:22:21.243+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 2
+[2024-11-28T21:22:21.253+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): transform_silver> on 2024-11-28 21:19:30.569723+00:00
+[2024-11-28T21:22:21.259+0000] {standard_task_runner.py:72} INFO - Started process 749 to run task
+[2024-11-28T21:22:21.261+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'brewery_ETL', 'transform_silver', 'manual__2024-11-28T21:19:30.569723+00:00', '--job-id', '205', '--raw', '--subdir', 'DAGS_FOLDER/openbrewery_dag.py', '--cfg-path', '/tmp/tmphgnadrzr']
+[2024-11-28T21:22:21.263+0000] {standard_task_runner.py:105} INFO - Job 205: Subtask transform_silver
+[2024-11-28T21:22:21.301+0000] {task_command.py:467} INFO - Running <TaskInstance: brewery_ETL.transform_silver manual__2024-11-28T21:19:30.569723+00:00 [running]> on host c5a3b208fc9f
+[2024-11-28T21:22:21.366+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='brewery_ETL' AIRFLOW_CTX_TASK_ID='transform_silver' AIRFLOW_CTX_EXECUTION_DATE='2024-11-28T21:19:30.569723+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-11-28T21:19:30.569723+00:00'
+[2024-11-28T21:22:21.367+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-11-28T21:22:21.382+0000] {transform_silver.py:112} INFO - Iniciando a tarefa transform_silver
+[2024-11-28T21:22:21.382+0000] {transform_silver.py:126} INFO - Data de execução: 2024-11-28
+[2024-11-28T21:22:21.382+0000] {transform_silver.py:16} INFO - Iniciando criação da sessão Spark para transformação Silver
+[2024-11-28T21:22:29.482+0000] {transform_silver.py:40} INFO - Sessão Spark criada com sucesso para transformação Silver
+[2024-11-28T21:22:29.483+0000] {transform_silver.py:49} INFO - Lendo dados da camada Bronze: s3a://breweris-etl-prod-sp/bronze/date=2024-11-28
+[2024-11-28T21:22:35.468+0000] {transform_silver.py:52} INFO - Dados da camada Bronze carregados: 50 registros
+[2024-11-28T21:22:35.469+0000] {transform_silver.py:61} INFO - Iniciando transformações na camada Silver
+[2024-11-28T21:22:36.464+0000] {transform_silver.py:66} INFO - Duplicatas removidas. Total de registros: 50
+[2024-11-28T21:22:36.582+0000] {transform_silver.py:82} INFO - Coluna 'localizacao' adicionada ao DataFrame
+[2024-11-28T21:22:36.583+0000] {transform_silver.py:86} INFO - Tipos de dados convertidos com sucesso e coluna 'localizacao' garantida
+[2024-11-28T21:22:36.584+0000] {transform_silver.py:88} INFO - Transformações na camada Silver concluídas
+[2024-11-28T21:22:36.607+0000] {transform_silver.py:140} INFO - Schema do DataFrame após transformações na camada Silver:
+[2024-11-28T21:22:36.610+0000] {logging_mixin.py:190} INFO - root
+ |-- id: string (nullable = true)
+ |-- name: string (nullable = true)
+ |-- brewery_type: string (nullable = true)
+ |-- street: string (nullable = true)
+ |-- city: string (nullable = true)
+ |-- state: string (nullable = true)
+ |-- postal_code: string (nullable = true)
+ |-- country: string (nullable = true)
+ |-- longitude: float (nullable = true)
+ |-- latitude: float (nullable = true)
+ |-- phone: string (nullable = true)
+ |-- website_url: string (nullable = true)
+ |-- updated_at: string (nullable = true)
+ |-- tag_list: array (nullable = true)
+ |    |-- element: string (containsNull = true)
+ |-- localizacao: string (nullable = false)
+ |-- date: string (nullable = false)
+[2024-11-28T21:22:36.610+0000] {transform_silver.py:97} INFO - Escrevendo dados na camada Silver: s3a://breweris-etl-prod-sp/silver/date=2024-11-28
+[2024-11-28T21:23:24.384+0000] {transform_silver.py:105} INFO - Dados escritos com sucesso na camada Silver particionados por 'localizacao' e 'date'
+[2024-11-28T21:23:24.385+0000] {transform_silver.py:146} INFO - Tarefa transform_silver concluída com sucesso
+[2024-11-28T21:23:24.815+0000] {transform_silver.py:153} INFO - Sessão Spark finalizada para a tarefa transform_silver
+[2024-11-28T21:23:24.816+0000] {python.py:240} INFO - Done. Returned value was: None
+[2024-11-28T21:23:24.829+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-11-28T21:23:24.830+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=brewery_ETL, task_id=transform_silver, run_id=manual__2024-11-28T21:19:30.569723+00:00, execution_date=20241128T211930, start_date=20241128T212221, end_date=20241128T212324
+[2024-11-28T21:23:24.865+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2024-11-28T21:23:24.892+0000] {taskinstance.py:3895} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2024-11-28T21:23:24.894+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

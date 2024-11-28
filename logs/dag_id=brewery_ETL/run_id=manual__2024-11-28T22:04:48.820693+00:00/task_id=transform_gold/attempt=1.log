@@ -1,0 +1,47 @@
+[2024-11-28T22:10:18.805+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-11-28T22:10:18.816+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: brewery_ETL.transform_gold manual__2024-11-28T22:04:48.820693+00:00 [queued]>
+[2024-11-28T22:10:18.822+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: brewery_ETL.transform_gold manual__2024-11-28T22:04:48.820693+00:00 [queued]>
+[2024-11-28T22:10:18.822+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 2
+[2024-11-28T22:10:18.832+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): transform_gold> on 2024-11-28 22:04:48.820693+00:00
+[2024-11-28T22:10:18.836+0000] {standard_task_runner.py:72} INFO - Started process 1612 to run task
+[2024-11-28T22:10:18.839+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'brewery_ETL', 'transform_gold', 'manual__2024-11-28T22:04:48.820693+00:00', '--job-id', '237', '--raw', '--subdir', 'DAGS_FOLDER/openbrewery_dag.py', '--cfg-path', '/tmp/tmp8h3r1ez9']
+[2024-11-28T22:10:18.840+0000] {standard_task_runner.py:105} INFO - Job 237: Subtask transform_gold
+[2024-11-28T22:10:18.883+0000] {task_command.py:467} INFO - Running <TaskInstance: brewery_ETL.transform_gold manual__2024-11-28T22:04:48.820693+00:00 [running]> on host e795a8a15502
+[2024-11-28T22:10:18.951+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='brewery_ETL' AIRFLOW_CTX_TASK_ID='transform_gold' AIRFLOW_CTX_EXECUTION_DATE='2024-11-28T22:04:48.820693+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-11-28T22:04:48.820693+00:00'
+[2024-11-28T22:10:18.953+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-11-28T22:10:18.970+0000] {transform_gold.py:148} INFO - Iniciando a tarefa transform_gold
+[2024-11-28T22:10:18.970+0000] {transform_gold.py:162} INFO - Data de execução: 2024-11-28
+[2024-11-28T22:10:18.971+0000] {transform_gold.py:25} INFO - Iniciando criação da sessão Spark para transformação Gold
+[2024-11-28T22:10:24.875+0000] {transform_gold.py:50} INFO - Sessão Spark criada com sucesso para transformação Gold
+[2024-11-28T22:10:24.876+0000] {transform_gold.py:59} INFO - Lendo dados da camada Silver: s3a://breweris-etl-prod-sp/silver/date=2024-11-28/
+[2024-11-28T22:10:34.125+0000] {transform_gold.py:91} INFO - Dados da camada Silver carregados: 50 registros
+[2024-11-28T22:10:34.126+0000] {transform_gold.py:101} INFO - Iniciando agregação dos dados para camada Gold
+[2024-11-28T22:10:34.126+0000] {transform_gold.py:104} INFO - Verificando valores nulos nas colunas 'brewery_type' e 'localizacao'
+[2024-11-28T22:10:35.518+0000] {transform_gold.py:109} WARNING - Existem 50 registros com valores nulos em 'brewery_type' ou 'localizacao'
+[2024-11-28T22:10:35.560+0000] {transform_gold.py:116} INFO - Schema do DataFrame Gold após agregação:
+[2024-11-28T22:10:35.563+0000] {logging_mixin.py:190} INFO - root
+ |-- brewery_type: string (nullable = true)
+ |-- localizacao: string (nullable = true)
+ |-- quantity_of_breweries: long (nullable = false)
+[2024-11-28T22:10:35.563+0000] {transform_gold.py:120} INFO - Exibindo alguns registros agregados para a camada Gold:
+[2024-11-28T22:10:36.985+0000] {logging_mixin.py:190} INFO - +------------+-----------+---------------------+
+|brewery_type|localizacao|quantity_of_breweries|
++------------+-----------+---------------------+
+|micro       |null       |31                   |
+|large       |null       |7                    |
+|brewpub     |null       |8                    |
+|closed      |null       |2                    |
+|proprietor  |null       |1                    |
++------------+-----------+---------------------+
+only showing top 5 rows
+[2024-11-28T22:10:36.986+0000] {transform_gold.py:123} INFO - Agregação concluída com sucesso
+[2024-11-28T22:10:36.986+0000] {transform_gold.py:132} INFO - Escrevendo dados na camada Gold: s3a://breweris-etl-prod-sp/gold/date=2024-11-28/
+[2024-11-28T22:10:44.941+0000] {transform_gold.py:141} INFO - Dados escritos com sucesso na camada Gold particionados por 'brewery_type' e 'localizacao'
+[2024-11-28T22:10:44.941+0000] {transform_gold.py:176} INFO - Tarefa transform_gold concluída com sucesso
+[2024-11-28T22:10:45.022+0000] {transform_gold.py:183} INFO - Sessão Spark finalizada para a tarefa transform_gold
+[2024-11-28T22:10:45.023+0000] {python.py:240} INFO - Done. Returned value was: None
+[2024-11-28T22:10:45.037+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-11-28T22:10:45.038+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=brewery_ETL, task_id=transform_gold, run_id=manual__2024-11-28T22:04:48.820693+00:00, execution_date=20241128T220448, start_date=20241128T221018, end_date=20241128T221045
+[2024-11-28T22:10:45.084+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2024-11-28T22:10:45.110+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-11-28T22:10:45.111+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
