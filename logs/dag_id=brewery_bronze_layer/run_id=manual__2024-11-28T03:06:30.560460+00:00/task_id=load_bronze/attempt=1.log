@@ -1,0 +1,231 @@
+[2024-11-28T03:07:00.404+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-11-28T03:07:00.419+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: brewery_bronze_layer.load_bronze manual__2024-11-28T03:06:30.560460+00:00 [queued]>
+[2024-11-28T03:07:00.426+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: brewery_bronze_layer.load_bronze manual__2024-11-28T03:06:30.560460+00:00 [queued]>
+[2024-11-28T03:07:00.426+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 2
+[2024-11-28T03:07:00.439+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): load_bronze> on 2024-11-28 03:06:30.560460+00:00
+[2024-11-28T03:07:00.443+0000] {standard_task_runner.py:72} INFO - Started process 79 to run task
+[2024-11-28T03:07:00.447+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'brewery_bronze_layer', 'load_bronze', 'manual__2024-11-28T03:06:30.560460+00:00', '--job-id', '84', '--raw', '--subdir', 'DAGS_FOLDER/openbrewery_dag.py', '--cfg-path', '/tmp/tmpp21372kn']
+[2024-11-28T03:07:00.448+0000] {standard_task_runner.py:105} INFO - Job 84: Subtask load_bronze
+[2024-11-28T03:07:00.492+0000] {task_command.py:467} INFO - Running <TaskInstance: brewery_bronze_layer.load_bronze manual__2024-11-28T03:06:30.560460+00:00 [running]> on host b579b4726c02
+[2024-11-28T03:07:00.562+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='brewery_bronze_layer' AIRFLOW_CTX_TASK_ID='load_bronze' AIRFLOW_CTX_EXECUTION_DATE='2024-11-28T03:06:30.560460+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-11-28T03:06:30.560460+00:00'
+[2024-11-28T03:07:00.563+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-11-28T03:07:00.575+0000] {load_bronze_module.py:104} INFO - Iniciando a tarefa load_bronze
+[2024-11-28T03:07:00.703+0000] {load_bronze_module.py:115} INFO - Recebidos 8355 registros para carregar na camada Bronze
+[2024-11-28T03:07:03.661+0000] {load_bronze_module.py:62} INFO - Sessão Spark criada com sucesso
+[2024-11-28T03:07:03.662+0000] {load_bronze_module.py:119} INFO - Sessão Spark criada com sucesso
+[2024-11-28T03:07:03.662+0000] {load_bronze_module.py:139} INFO - Criando DataFrame com Spark
+[2024-11-28T03:07:06.974+0000] {load_bronze_module.py:142} INFO - DataFrame criado com sucesso
+[2024-11-28T03:07:06.975+0000] {load_bronze_module.py:144} INFO - Verificando dados que não atendem ao padrão
+[2024-11-28T03:07:15.892+0000] {load_bronze_module.py:151} ERROR - Existem 2328 registros com longitude inválida.
+[2024-11-28T03:07:15.906+0000] {load_bronze_module.py:155} INFO - Salvando registros inválidos em: s3a://breweris-etl-prod-sp/bronze/errors/date=2024-11-28/invalid_longitudes.json
+[2024-11-28T03:07:16.041+0000] {load_bronze_module.py:172} ERROR - Erro ao salvar dados na camada Bronze: An error occurred while calling o72.json.
+: java.lang.RuntimeException: java.lang.ClassNotFoundException: Class org.apache.hadoop.fs.s3a.S3AFileSystem not found
+	at org.apache.hadoop.conf.Configuration.getClass(Configuration.java:2688)
+	at org.apache.hadoop.fs.FileSystem.getFileSystemClass(FileSystem.java:3431)
+	at org.apache.hadoop.fs.FileSystem.createFileSystem(FileSystem.java:3466)
+	at org.apache.hadoop.fs.FileSystem.access$300(FileSystem.java:174)
+	at org.apache.hadoop.fs.FileSystem$Cache.getInternal(FileSystem.java:3574)
+	at org.apache.hadoop.fs.FileSystem$Cache.get(FileSystem.java:3521)
+	at org.apache.hadoop.fs.FileSystem.get(FileSystem.java:540)
+	at org.apache.hadoop.fs.Path.getFileSystem(Path.java:365)
+	at org.apache.spark.sql.execution.datasources.DataSource.planForWritingFileFormat(DataSource.scala:454)
+	at org.apache.spark.sql.execution.datasources.DataSource.planForWriting(DataSource.scala:530)
+	at org.apache.spark.sql.DataFrameWriter.saveToV1Source(DataFrameWriter.scala:387)
+	at org.apache.spark.sql.DataFrameWriter.saveInternal(DataFrameWriter.scala:360)
+	at org.apache.spark.sql.DataFrameWriter.save(DataFrameWriter.scala:239)
+	at org.apache.spark.sql.DataFrameWriter.json(DataFrameWriter.scala:771)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:244)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:282)
+	at py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:132)
+	at py4j.commands.CallCommand.execute(CallCommand.java:79)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:182)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:106)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+Caused by: java.lang.ClassNotFoundException: Class org.apache.hadoop.fs.s3a.S3AFileSystem not found
+	at org.apache.hadoop.conf.Configuration.getClassByName(Configuration.java:2592)
+	at org.apache.hadoop.conf.Configuration.getClass(Configuration.java:2686)
+	... 25 more
+
+[2024-11-28T03:07:16.717+0000] {load_bronze_module.py:177} INFO - Sessão Spark finalizada e tarefa load_bronze concluída
+[2024-11-28T03:07:16.718+0000] {taskinstance.py:3311} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+  File "/opt/airflow/scripts/load_bronze_module.py", line 156, in load_bronze
+    df_invalid.write.mode('append').json(f"s3a://{os.getenv('S3_BUCKET')}/{invalid_records_path}/invalid_longitudes.json")
+  File "/home/airflow/.local/lib/python3.9/site-packages/pyspark/sql/readwriter.py", line 1593, in json
+    self._jwrite.json(path)
+  File "/home/airflow/.local/lib/python3.9/site-packages/py4j/java_gateway.py", line 1322, in __call__
+    return_value = get_return_value(
+  File "/home/airflow/.local/lib/python3.9/site-packages/pyspark/errors/exceptions/captured.py", line 169, in deco
+    return f(*a, **kw)
+  File "/home/airflow/.local/lib/python3.9/site-packages/py4j/protocol.py", line 326, in get_return_value
+    raise Py4JJavaError(
+py4j.protocol.Py4JJavaError: An error occurred while calling o72.json.
+: java.lang.RuntimeException: java.lang.ClassNotFoundException: Class org.apache.hadoop.fs.s3a.S3AFileSystem not found
+	at org.apache.hadoop.conf.Configuration.getClass(Configuration.java:2688)
+	at org.apache.hadoop.fs.FileSystem.getFileSystemClass(FileSystem.java:3431)
+	at org.apache.hadoop.fs.FileSystem.createFileSystem(FileSystem.java:3466)
+	at org.apache.hadoop.fs.FileSystem.access$300(FileSystem.java:174)
+	at org.apache.hadoop.fs.FileSystem$Cache.getInternal(FileSystem.java:3574)
+	at org.apache.hadoop.fs.FileSystem$Cache.get(FileSystem.java:3521)
+	at org.apache.hadoop.fs.FileSystem.get(FileSystem.java:540)
+	at org.apache.hadoop.fs.Path.getFileSystem(Path.java:365)
+	at org.apache.spark.sql.execution.datasources.DataSource.planForWritingFileFormat(DataSource.scala:454)
+	at org.apache.spark.sql.execution.datasources.DataSource.planForWriting(DataSource.scala:530)
+	at org.apache.spark.sql.DataFrameWriter.saveToV1Source(DataFrameWriter.scala:387)
+	at org.apache.spark.sql.DataFrameWriter.saveInternal(DataFrameWriter.scala:360)
+	at org.apache.spark.sql.DataFrameWriter.save(DataFrameWriter.scala:239)
+	at org.apache.spark.sql.DataFrameWriter.json(DataFrameWriter.scala:771)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:244)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:282)
+	at py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:132)
+	at py4j.commands.CallCommand.execute(CallCommand.java:79)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:182)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:106)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+Caused by: java.lang.ClassNotFoundException: Class org.apache.hadoop.fs.s3a.S3AFileSystem not found
+	at org.apache.hadoop.conf.Configuration.getClassByName(Configuration.java:2592)
+	at org.apache.hadoop.conf.Configuration.getClass(Configuration.java:2686)
+	... 25 more
+
+[2024-11-28T03:07:16.736+0000] {taskinstance.py:1225} INFO - Marking task as UP_FOR_RETRY. dag_id=brewery_bronze_layer, task_id=load_bronze, run_id=manual__2024-11-28T03:06:30.560460+00:00, execution_date=20241128T030630, start_date=20241128T030700, end_date=20241128T030716
+[2024-11-28T03:07:16.751+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-11-28T03:07:16.751+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 84 for task load_bronze (An error occurred while calling o72.json.
+: java.lang.RuntimeException: java.lang.ClassNotFoundException: Class org.apache.hadoop.fs.s3a.S3AFileSystem not found
+	at org.apache.hadoop.conf.Configuration.getClass(Configuration.java:2688)
+	at org.apache.hadoop.fs.FileSystem.getFileSystemClass(FileSystem.java:3431)
+	at org.apache.hadoop.fs.FileSystem.createFileSystem(FileSystem.java:3466)
+	at org.apache.hadoop.fs.FileSystem.access$300(FileSystem.java:174)
+	at org.apache.hadoop.fs.FileSystem$Cache.getInternal(FileSystem.java:3574)
+	at org.apache.hadoop.fs.FileSystem$Cache.get(FileSystem.java:3521)
+	at org.apache.hadoop.fs.FileSystem.get(FileSystem.java:540)
+	at org.apache.hadoop.fs.Path.getFileSystem(Path.java:365)
+	at org.apache.spark.sql.execution.datasources.DataSource.planForWritingFileFormat(DataSource.scala:454)
+	at org.apache.spark.sql.execution.datasources.DataSource.planForWriting(DataSource.scala:530)
+	at org.apache.spark.sql.DataFrameWriter.saveToV1Source(DataFrameWriter.scala:387)
+	at org.apache.spark.sql.DataFrameWriter.saveInternal(DataFrameWriter.scala:360)
+	at org.apache.spark.sql.DataFrameWriter.save(DataFrameWriter.scala:239)
+	at org.apache.spark.sql.DataFrameWriter.json(DataFrameWriter.scala:771)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:244)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:282)
+	at py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:132)
+	at py4j.commands.CallCommand.execute(CallCommand.java:79)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:182)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:106)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+Caused by: java.lang.ClassNotFoundException: Class org.apache.hadoop.fs.s3a.S3AFileSystem not found
+	at org.apache.hadoop.conf.Configuration.getClassByName(Configuration.java:2592)
+	at org.apache.hadoop.conf.Configuration.getClass(Configuration.java:2686)
+	... 25 more
+; 79)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 3005, in _run_raw_task
+    return _run_raw_task(
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 3159, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 3183, in _execute_task
+    return _execute_task(self, context, task_orig)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+  File "/opt/airflow/scripts/load_bronze_module.py", line 156, in load_bronze
+    df_invalid.write.mode('append').json(f"s3a://{os.getenv('S3_BUCKET')}/{invalid_records_path}/invalid_longitudes.json")
+  File "/home/airflow/.local/lib/python3.9/site-packages/pyspark/sql/readwriter.py", line 1593, in json
+    self._jwrite.json(path)
+  File "/home/airflow/.local/lib/python3.9/site-packages/py4j/java_gateway.py", line 1322, in __call__
+    return_value = get_return_value(
+  File "/home/airflow/.local/lib/python3.9/site-packages/pyspark/errors/exceptions/captured.py", line 169, in deco
+    return f(*a, **kw)
+  File "/home/airflow/.local/lib/python3.9/site-packages/py4j/protocol.py", line 326, in get_return_value
+    raise Py4JJavaError(
+py4j.protocol.Py4JJavaError: An error occurred while calling o72.json.
+: java.lang.RuntimeException: java.lang.ClassNotFoundException: Class org.apache.hadoop.fs.s3a.S3AFileSystem not found
+	at org.apache.hadoop.conf.Configuration.getClass(Configuration.java:2688)
+	at org.apache.hadoop.fs.FileSystem.getFileSystemClass(FileSystem.java:3431)
+	at org.apache.hadoop.fs.FileSystem.createFileSystem(FileSystem.java:3466)
+	at org.apache.hadoop.fs.FileSystem.access$300(FileSystem.java:174)
+	at org.apache.hadoop.fs.FileSystem$Cache.getInternal(FileSystem.java:3574)
+	at org.apache.hadoop.fs.FileSystem$Cache.get(FileSystem.java:3521)
+	at org.apache.hadoop.fs.FileSystem.get(FileSystem.java:540)
+	at org.apache.hadoop.fs.Path.getFileSystem(Path.java:365)
+	at org.apache.spark.sql.execution.datasources.DataSource.planForWritingFileFormat(DataSource.scala:454)
+	at org.apache.spark.sql.execution.datasources.DataSource.planForWriting(DataSource.scala:530)
+	at org.apache.spark.sql.DataFrameWriter.saveToV1Source(DataFrameWriter.scala:387)
+	at org.apache.spark.sql.DataFrameWriter.saveInternal(DataFrameWriter.scala:360)
+	at org.apache.spark.sql.DataFrameWriter.save(DataFrameWriter.scala:239)
+	at org.apache.spark.sql.DataFrameWriter.json(DataFrameWriter.scala:771)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:569)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:244)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:374)
+	at py4j.Gateway.invoke(Gateway.java:282)
+	at py4j.commands.AbstractCommand.invokeMethod(AbstractCommand.java:132)
+	at py4j.commands.CallCommand.execute(CallCommand.java:79)
+	at py4j.ClientServerConnection.waitForCommands(ClientServerConnection.java:182)
+	at py4j.ClientServerConnection.run(ClientServerConnection.java:106)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+Caused by: java.lang.ClassNotFoundException: Class org.apache.hadoop.fs.s3a.S3AFileSystem not found
+	at org.apache.hadoop.conf.Configuration.getClassByName(Configuration.java:2592)
+	at org.apache.hadoop.conf.Configuration.getClass(Configuration.java:2686)
+	... 25 more
+
+[2024-11-28T03:07:16.782+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2024-11-28T03:07:16.803+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-11-28T03:07:16.805+0000] {local_task_job_runner.py:245} INFO - ::endgroup::
