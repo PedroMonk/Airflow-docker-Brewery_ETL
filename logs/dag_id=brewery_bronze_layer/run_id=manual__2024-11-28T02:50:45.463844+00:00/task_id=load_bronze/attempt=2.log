@@ -1,0 +1,90 @@
+[2024-11-28T02:56:41.526+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-11-28T02:56:41.538+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: brewery_bronze_layer.load_bronze manual__2024-11-28T02:50:45.463844+00:00 [queued]>
+[2024-11-28T02:56:41.544+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: brewery_bronze_layer.load_bronze manual__2024-11-28T02:50:45.463844+00:00 [queued]>
+[2024-11-28T02:56:41.544+0000] {taskinstance.py:2866} INFO - Starting attempt 2 of 2
+[2024-11-28T02:56:41.596+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): load_bronze> on 2024-11-28 02:50:45.463844+00:00
+[2024-11-28T02:56:41.602+0000] {standard_task_runner.py:72} INFO - Started process 389 to run task
+[2024-11-28T02:56:41.605+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'brewery_bronze_layer', 'load_bronze', 'manual__2024-11-28T02:50:45.463844+00:00', '--job-id', '73', '--raw', '--subdir', 'DAGS_FOLDER/openbrewery_dag.py', '--cfg-path', '/tmp/tmps24s3zk8']
+[2024-11-28T02:56:41.608+0000] {standard_task_runner.py:105} INFO - Job 73: Subtask load_bronze
+[2024-11-28T02:56:41.654+0000] {task_command.py:467} INFO - Running <TaskInstance: brewery_bronze_layer.load_bronze manual__2024-11-28T02:50:45.463844+00:00 [running]> on host a76fd60aefd9
+[2024-11-28T02:56:41.724+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='brewery_bronze_layer' AIRFLOW_CTX_TASK_ID='load_bronze' AIRFLOW_CTX_EXECUTION_DATE='2024-11-28T02:50:45.463844+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-11-28T02:50:45.463844+00:00'
+[2024-11-28T02:56:41.724+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-11-28T02:56:41.739+0000] {load_bronze_module.py:104} INFO - Iniciando a tarefa load_bronze
+[2024-11-28T02:56:41.866+0000] {load_bronze_module.py:115} INFO - Recebidos 8355 registros para carregar na camada Bronze
+[2024-11-28T02:56:45.215+0000] {load_bronze_module.py:62} INFO - Sessão Spark criada com sucesso
+[2024-11-28T02:56:45.215+0000] {load_bronze_module.py:119} INFO - Sessão Spark criada com sucesso
+[2024-11-28T02:56:45.216+0000] {load_bronze_module.py:139} INFO - Criando DataFrame com Spark
+[2024-11-28T02:56:47.575+0000] {load_bronze_module.py:142} INFO - DataFrame criado com sucesso
+[2024-11-28T02:56:47.576+0000] {load_bronze_module.py:144} INFO - Verificando dados que não atendem ao padrão
+[2024-11-28T02:56:55.038+0000] {load_bronze_module.py:151} ERROR - Existem 2328 registros com longitude inválida.
+[2024-11-28T02:56:55.052+0000] {load_bronze_module.py:172} ERROR - Erro ao salvar dados na camada Bronze: 'Variable S3_BRONZE_PATH does not exist'
+[2024-11-28T02:56:55.876+0000] {load_bronze_module.py:177} INFO - Sessão Spark finalizada e tarefa load_bronze concluída
+[2024-11-28T02:56:55.878+0000] {taskinstance.py:3311} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+  File "/opt/airflow/scripts/load_bronze_module.py", line 153, in load_bronze
+    invalid_records_path = f"{Variable.get('S3_BRONZE_PATH')}/errors/date={kwargs['execution_date'].strftime('%Y-%m-%d')}"
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/variable.py", line 145, in get
+    raise KeyError(f"Variable {key} does not exist")
+KeyError: 'Variable S3_BRONZE_PATH does not exist'
+[2024-11-28T02:56:55.888+0000] {taskinstance.py:1225} INFO - Marking task as FAILED. dag_id=brewery_bronze_layer, task_id=load_bronze, run_id=manual__2024-11-28T02:50:45.463844+00:00, execution_date=20241128T025045, start_date=20241128T025641, end_date=20241128T025655
+[2024-11-28T02:56:55.902+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-11-28T02:56:55.903+0000] {standard_task_runner.py:124} ERROR - Failed to execute job 73 for task load_bronze ('Variable S3_BRONZE_PATH does not exist'; 389)
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/task/task_runner/standard_task_runner.py", line 117, in _start_by_fork
+    ret = args.func(args, dag=self.dag)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/cli/cli_config.py", line 49, in command
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/utils/cli.py", line 116, in wrapper
+    return f(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/cli/commands/task_command.py", line 483, in task_run
+    task_return_code = _run_task_by_selected_method(args, _dag, ti)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/cli/commands/task_command.py", line 256, in _run_task_by_selected_method
+    return _run_raw_task(args, ti)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/cli/commands/task_command.py", line 341, in _run_raw_task
+    return ti._run_raw_task(
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/utils/session.py", line 97, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 3005, in _run_raw_task
+    return _run_raw_task(
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 273, in _run_raw_task
+    TaskInstance._execute_task_with_callbacks(
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 3159, in _execute_task_with_callbacks
+    result = self._execute_task(context, task_orig)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 3183, in _execute_task
+    return _execute_task(self, context, task_orig)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 767, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 733, in _execute_callable
+    return ExecutionCallableRunner(
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/baseoperator.py", line 417, in wrapper
+    return func(self, *args, **kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 238, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/operators/python.py", line 256, in execute_callable
+    return runner.run(*self.op_args, **self.op_kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/utils/operator_helpers.py", line 252, in run
+    return self.func(*args, **kwargs)
+  File "/opt/airflow/scripts/load_bronze_module.py", line 153, in load_bronze
+    invalid_records_path = f"{Variable.get('S3_BRONZE_PATH')}/errors/date={kwargs['execution_date'].strftime('%Y-%m-%d')}"
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/variable.py", line 145, in get
+    raise KeyError(f"Variable {key} does not exist")
+KeyError: 'Variable S3_BRONZE_PATH does not exist'
+[2024-11-28T02:56:55.937+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 1
+[2024-11-28T02:56:55.958+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-11-28T02:56:55.960+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

@@ -1,0 +1,30 @@
+[2024-11-28T04:20:37.256+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-11-28T04:20:37.269+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: brewery_bronze_layer.load_bronze manual__2024-11-28T04:10:11.333993+00:00 [queued]>
+[2024-11-28T04:20:37.275+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: brewery_bronze_layer.load_bronze manual__2024-11-28T04:10:11.333993+00:00 [queued]>
+[2024-11-28T04:20:37.275+0000] {taskinstance.py:2866} INFO - Starting attempt 2 of 2
+[2024-11-28T04:20:37.284+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): load_bronze> on 2024-11-28 04:10:11.333993+00:00
+[2024-11-28T04:20:37.289+0000] {standard_task_runner.py:72} INFO - Started process 2747 to run task
+[2024-11-28T04:20:37.292+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'brewery_bronze_layer', 'load_bronze', 'manual__2024-11-28T04:10:11.333993+00:00', '--job-id', '139', '--raw', '--subdir', 'DAGS_FOLDER/openbrewery_dag.py', '--cfg-path', '/tmp/tmp6kul5qbk']
+[2024-11-28T04:20:37.294+0000] {standard_task_runner.py:105} INFO - Job 139: Subtask load_bronze
+[2024-11-28T04:20:37.330+0000] {task_command.py:467} INFO - Running <TaskInstance: brewery_bronze_layer.load_bronze manual__2024-11-28T04:10:11.333993+00:00 [running]> on host 2683cbf29485
+[2024-11-28T04:20:37.388+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='brewery_bronze_layer' AIRFLOW_CTX_TASK_ID='load_bronze' AIRFLOW_CTX_EXECUTION_DATE='2024-11-28T04:10:11.333993+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-11-28T04:10:11.333993+00:00'
+[2024-11-28T04:20:37.389+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-11-28T04:20:37.401+0000] {load_bronze_module.py:109} INFO - Iniciando a tarefa load_bronze
+[2024-11-28T04:20:37.520+0000] {load_bronze_module.py:128} INFO - Recebidos 8355 registros para carregar na camada Bronze
+[2024-11-28T04:20:37.521+0000] {load_bronze_module.py:43} INFO - Iniciando criação da sessão Spark
+[2024-11-28T04:20:44.353+0000] {load_bronze_module.py:67} INFO - Sessão Spark criada com sucesso
+[2024-11-28T04:20:44.353+0000] {load_bronze_module.py:132} INFO - Sessão Spark criada com sucesso
+[2024-11-28T04:20:44.354+0000] {load_bronze_module.py:152} INFO - Criando DataFrame com Spark
+[2024-11-28T04:20:46.838+0000] {load_bronze_module.py:155} INFO - DataFrame criado com sucesso
+[2024-11-28T04:20:46.838+0000] {load_bronze_module.py:157} INFO - Verificando dados que não atendem ao padrão
+[2024-11-28T04:21:36.145+0000] {load_bronze_module.py:164} ERROR - Existem 2328 registros com longitude inválida.
+[2024-11-28T04:21:36.156+0000] {load_bronze_module.py:168} INFO - Salvando registros inválidos em: s3a://breweris-etl-prod-sp/bronze/errors/date=2024-11-28/invalid_longitudes.json
+[2024-11-28T04:22:27.508+0000] {load_bronze_module.py:179} INFO - Salvando dados no S3 em: s3a://breweris-etl-prod-sp/bronze/date=2024-11-28
+[2024-11-28T04:22:38.407+0000] {load_bronze_module.py:183} INFO - Dados salvos com sucesso na camada Bronze: bronze/date=2024-11-28
+[2024-11-28T04:22:38.684+0000] {load_bronze_module.py:190} INFO - Sessão Spark finalizada e tarefa load_bronze concluída
+[2024-11-28T04:22:38.704+0000] {python.py:240} INFO - Done. Returned value was: None
+[2024-11-28T04:22:38.718+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-11-28T04:22:38.723+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=brewery_bronze_layer, task_id=load_bronze, run_id=manual__2024-11-28T04:10:11.333993+00:00, execution_date=20241128T041011, start_date=20241128T042037, end_date=20241128T042238
+[2024-11-28T04:22:38.767+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2024-11-28T04:22:38.796+0000] {taskinstance.py:3895} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2024-11-28T04:22:38.798+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

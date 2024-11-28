@@ -1,0 +1,20 @@
+[2024-11-28T02:56:13.987+0000] {local_task_job_runner.py:123} INFO - ::group::Pre task execution logs
+[2024-11-28T02:56:14.000+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: brewery_bronze_layer.extract_brewery_data manual__2024-11-28T02:56:10.541178+00:00 [queued]>
+[2024-11-28T02:56:14.006+0000] {taskinstance.py:2613} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: brewery_bronze_layer.extract_brewery_data manual__2024-11-28T02:56:10.541178+00:00 [queued]>
+[2024-11-28T02:56:14.006+0000] {taskinstance.py:2866} INFO - Starting attempt 1 of 2
+[2024-11-28T02:56:14.016+0000] {taskinstance.py:2889} INFO - Executing <Task(PythonOperator): extract_brewery_data> on 2024-11-28 02:56:10.541178+00:00
+[2024-11-28T02:56:14.019+0000] {standard_task_runner.py:72} INFO - Started process 49 to run task
+[2024-11-28T02:56:14.022+0000] {standard_task_runner.py:104} INFO - Running: ['***', 'tasks', 'run', 'brewery_bronze_layer', 'extract_brewery_data', 'manual__2024-11-28T02:56:10.541178+00:00', '--job-id', '71', '--raw', '--subdir', 'DAGS_FOLDER/openbrewery_dag.py', '--cfg-path', '/tmp/tmpk3qjkk1m']
+[2024-11-28T02:56:14.024+0000] {standard_task_runner.py:105} INFO - Job 71: Subtask extract_brewery_data
+[2024-11-28T02:56:14.060+0000] {task_command.py:467} INFO - Running <TaskInstance: brewery_bronze_layer.extract_brewery_data manual__2024-11-28T02:56:10.541178+00:00 [running]> on host a76fd60aefd9
+[2024-11-28T02:56:14.122+0000] {taskinstance.py:3132} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='brewery_bronze_layer' AIRFLOW_CTX_TASK_ID='extract_brewery_data' AIRFLOW_CTX_EXECUTION_DATE='2024-11-28T02:56:10.541178+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2024-11-28T02:56:10.541178+00:00'
+[2024-11-28T02:56:14.122+0000] {taskinstance.py:731} INFO - ::endgroup::
+[2024-11-28T02:56:14.144+0000] {load_bronze_module.py:83} INFO - Iniciando a extração de dados da API
+[2024-11-28T02:56:21.382+0000] {load_bronze_module.py:92} INFO - Parando a coleta de dados na página 169 devido a dados vazios.
+[2024-11-28T02:56:21.556+0000] {load_bronze_module.py:100} INFO - Extraídos dados de 8355 cervejarias.
+[2024-11-28T02:56:21.565+0000] {python.py:240} INFO - Done. Returned value was: None
+[2024-11-28T02:56:21.574+0000] {taskinstance.py:340} INFO - ::group::Post task execution logs
+[2024-11-28T02:56:21.574+0000] {taskinstance.py:352} INFO - Marking task as SUCCESS. dag_id=brewery_bronze_layer, task_id=extract_brewery_data, run_id=manual__2024-11-28T02:56:10.541178+00:00, execution_date=20241128T025610, start_date=20241128T025614, end_date=20241128T025621
+[2024-11-28T02:56:21.609+0000] {local_task_job_runner.py:266} INFO - Task exited with return code 0
+[2024-11-28T02:56:21.627+0000] {taskinstance.py:3895} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2024-11-28T02:56:21.629+0000] {local_task_job_runner.py:245} INFO - ::endgroup::

@@ -1,0 +1,153 @@
+[2024-11-27T03:59:55.376+0000] {processor.py:157} INFO - Started process (PID=199) to work on /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T03:59:55.377+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/openbrewery_dag_.py for tasks to queue
+[2024-11-27T03:59:55.377+0000] {logging_mixin.py:151} INFO - [2024-11-27T03:59:55.377+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T03:59:55.692+0000] {processor.py:839} INFO - DAG(s) dict_keys(['brewery_bronze_layer']) retrieved from /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T03:59:55.903+0000] {logging_mixin.py:151} INFO - [2024-11-27T03:59:55.902+0000] {manager.py:409} ERROR - Add View Menu Error: %s
+[2024-11-27T03:59:55.909+0000] {logging_mixin.py:151} INFO - [2024-11-27T03:59:55.908+0000] {manager.py:499} INFO - Created Permission View: %s
+[2024-11-27T03:59:55.917+0000] {logging_mixin.py:151} INFO - [2024-11-27T03:59:55.917+0000] {manager.py:499} INFO - Created Permission View: %s
+[2024-11-27T03:59:55.923+0000] {logging_mixin.py:151} INFO - [2024-11-27T03:59:55.923+0000] {manager.py:499} INFO - Created Permission View: %s
+[2024-11-27T03:59:55.923+0000] {logging_mixin.py:151} INFO - [2024-11-27T03:59:55.923+0000] {security.py:708} INFO - Not syncing DAG-level permissions for DAG 'DAG:brewery_bronze_layer' as access control is unset.
+[2024-11-27T03:59:55.924+0000] {logging_mixin.py:151} INFO - [2024-11-27T03:59:55.923+0000] {dag.py:2915} INFO - Sync 1 DAGs
+[2024-11-27T03:59:55.934+0000] {logging_mixin.py:151} INFO - [2024-11-27T03:59:55.934+0000] {dag.py:2937} INFO - Creating ORM DAG for brewery_bronze_layer
+[2024-11-27T03:59:55.944+0000] {logging_mixin.py:151} INFO - [2024-11-27T03:59:55.943+0000] {dag.py:3696} INFO - Setting next_dagrun for brewery_bronze_layer to 2024-11-26T00:00:00+00:00, run_after=2024-11-27T00:00:00+00:00
+[2024-11-27T03:59:56.314+0000] {logging_mixin.py:151} INFO - [2024-11-27T03:59:56.313+0000] {dagbag.py:647} ERROR - Failed to write serialized DAG: /opt/airflow/dags/openbrewery_dag_.py
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/dagbag.py", line 636, in _serialize_dag_capturing_errors
+    dag_was_updated = SerializedDagModel.write_dag(
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/utils/session.py", line 74, in wrapper
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/serialized_dag.py", line 147, in write_dag
+    if session.scalar(
+  File "/home/airflow/.local/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1747, in scalar
+    return self.execute(
+  File "/home/airflow/.local/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1716, in execute
+    conn = self._connection_for_bind(bind)
+  File "/home/airflow/.local/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1555, in _connection_for_bind
+    return self._transaction._connection_for_bind(
+  File "/home/airflow/.local/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 724, in _connection_for_bind
+    self._assert_active()
+  File "/home/airflow/.local/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 604, in _assert_active
+    raise sa_exc.PendingRollbackError(
+sqlalchemy.exc.PendingRollbackError: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "dag_pkey"
+DETAIL:  Key (dag_id)=(brewery_bronze_layer) already exists.
+
+[SQL: INSERT INTO dag (dag_id, root_dag_id, is_paused, is_subdag, is_active, last_parsed_time, last_pickled, last_expired, scheduler_lock, pickle_id, fileloc, processor_subdir, owners, description, default_view, schedule_interval, timetable_description, max_active_tasks, max_active_runs, has_task_concurrency_limits, has_import_errors, next_dagrun, next_dagrun_data_interval_start, next_dagrun_data_interval_end, next_dagrun_create_after) VALUES (%(dag_id)s, %(root_dag_id)s, %(is_paused)s, %(is_subdag)s, %(is_active)s, %(last_parsed_time)s, %(last_pickled)s, %(last_expired)s, %(scheduler_lock)s, %(pickle_id)s, %(fileloc)s, %(processor_subdir)s, %(owners)s, %(description)s, %(default_view)s, %(schedule_interval)s, %(timetable_description)s, %(max_active_tasks)s, %(max_active_runs)s, %(has_task_concurrency_limits)s, %(has_import_errors)s, %(next_dagrun)s, %(next_dagrun_data_interval_start)s, %(next_dagrun_data_interval_end)s, %(next_dagrun_create_after)s)]
+[parameters: {'dag_id': 'brewery_bronze_layer', 'root_dag_id': None, 'is_paused': True, 'is_subdag': False, 'is_active': True, 'last_parsed_time': datetime.datetime(2024, 11, 27, 3, 59, 55, 942514, tzinfo=Timezone('UTC')), 'last_pickled': None, 'last_expired': None, 'scheduler_lock': None, 'pickle_id': None, 'fileloc': '/opt/airflow/dags/openbrewery_dag_.py', 'processor_subdir': '/opt/airflow/dags', 'owners': 'airflow', 'description': 'Coleta dados da Open Brewery DB API e salva na camada Bronze', 'default_view': 'grid', 'schedule_interval': '"@daily"', 'timetable_description': 'At 00:00', 'max_active_tasks': 16, 'max_active_runs': 16, 'has_task_concurrency_limits': False, 'has_import_errors': False, 'next_dagrun': DateTime(2024, 11, 26, 0, 0, 0, tzinfo=Timezone('UTC')), 'next_dagrun_data_interval_start': DateTime(2024, 11, 26, 0, 0, 0, tzinfo=Timezone('UTC')), 'next_dagrun_data_interval_end': DateTime(2024, 11, 27, 0, 0, 0, tzinfo=Timezone('UTC')), 'next_dagrun_create_after': DateTime(2024, 11, 27, 0, 0, 0, tzinfo=Timezone('UTC'))}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj) (Background on this error at: https://sqlalche.me/e/14/7s2a)
+[2024-11-27T03:59:56.315+0000] {logging_mixin.py:151} INFO - [2024-11-27T03:59:56.315+0000] {dag.py:2915} INFO - Sync 1 DAGs
+[2024-11-27T03:59:56.316+0000] {processor.py:182} ERROR - Got an exception! Propagating...
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/dag_processing/processor.py", line 178, in _run_file_processor
+    _handle_dag_file_processing()
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/dag_processing/processor.py", line 159, in _handle_dag_file_processing
+    result: tuple[int, int] = dag_file_processor.process_file(
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/utils/session.py", line 77, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/dag_processing/processor.py", line 857, in process_file
+    serialize_errors = DagFileProcessor.save_dag_to_db(
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/api_internal/internal_api_call.py", line 114, in wrapper
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/utils/session.py", line 77, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/dag_processing/processor.py", line 893, in save_dag_to_db
+    import_errors = DagBag._sync_to_db(dags=dags, processor_subdir=dag_directory, session=session)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/utils/session.py", line 74, in wrapper
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/dagbag.py", line 657, in _sync_to_db
+    for attempt in run_with_db_retries(logger=log):
+  File "/home/airflow/.local/lib/python3.9/site-packages/tenacity/__init__.py", line 347, in __iter__
+    do = self.iter(retry_state=retry_state)
+  File "/home/airflow/.local/lib/python3.9/site-packages/tenacity/__init__.py", line 314, in iter
+    return fut.result()
+  File "/usr/local/lib/python3.9/concurrent/futures/_base.py", line 439, in result
+    return self.__get_result()
+  File "/usr/local/lib/python3.9/concurrent/futures/_base.py", line 391, in __get_result
+    raise self._exception
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/dagbag.py", line 671, in _sync_to_db
+    DAG.bulk_write_to_db(dags.values(), processor_subdir=processor_subdir, session=session)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/utils/session.py", line 74, in wrapper
+    return func(*args, **kwargs)
+  File "/home/airflow/.local/lib/python3.9/site-packages/airflow/models/dag.py", line 2927, in bulk_write_to_db
+    orm_dags: list[DagModel] = session.scalars(query).unique().all()
+  File "/home/airflow/.local/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1778, in scalars
+    return self.execute(
+  File "/home/airflow/.local/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1716, in execute
+    conn = self._connection_for_bind(bind)
+  File "/home/airflow/.local/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 1555, in _connection_for_bind
+    return self._transaction._connection_for_bind(
+  File "/home/airflow/.local/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 724, in _connection_for_bind
+    self._assert_active()
+  File "/home/airflow/.local/lib/python3.9/site-packages/sqlalchemy/orm/session.py", line 604, in _assert_active
+    raise sa_exc.PendingRollbackError(
+sqlalchemy.exc.PendingRollbackError: This Session's transaction has been rolled back due to a previous exception during flush. To begin a new transaction with this Session, first issue Session.rollback(). Original exception was: (psycopg2.errors.UniqueViolation) duplicate key value violates unique constraint "dag_pkey"
+DETAIL:  Key (dag_id)=(brewery_bronze_layer) already exists.
+
+[SQL: INSERT INTO dag (dag_id, root_dag_id, is_paused, is_subdag, is_active, last_parsed_time, last_pickled, last_expired, scheduler_lock, pickle_id, fileloc, processor_subdir, owners, description, default_view, schedule_interval, timetable_description, max_active_tasks, max_active_runs, has_task_concurrency_limits, has_import_errors, next_dagrun, next_dagrun_data_interval_start, next_dagrun_data_interval_end, next_dagrun_create_after) VALUES (%(dag_id)s, %(root_dag_id)s, %(is_paused)s, %(is_subdag)s, %(is_active)s, %(last_parsed_time)s, %(last_pickled)s, %(last_expired)s, %(scheduler_lock)s, %(pickle_id)s, %(fileloc)s, %(processor_subdir)s, %(owners)s, %(description)s, %(default_view)s, %(schedule_interval)s, %(timetable_description)s, %(max_active_tasks)s, %(max_active_runs)s, %(has_task_concurrency_limits)s, %(has_import_errors)s, %(next_dagrun)s, %(next_dagrun_data_interval_start)s, %(next_dagrun_data_interval_end)s, %(next_dagrun_create_after)s)]
+[parameters: {'dag_id': 'brewery_bronze_layer', 'root_dag_id': None, 'is_paused': True, 'is_subdag': False, 'is_active': True, 'last_parsed_time': datetime.datetime(2024, 11, 27, 3, 59, 55, 942514, tzinfo=Timezone('UTC')), 'last_pickled': None, 'last_expired': None, 'scheduler_lock': None, 'pickle_id': None, 'fileloc': '/opt/airflow/dags/openbrewery_dag_.py', 'processor_subdir': '/opt/airflow/dags', 'owners': 'airflow', 'description': 'Coleta dados da Open Brewery DB API e salva na camada Bronze', 'default_view': 'grid', 'schedule_interval': '"@daily"', 'timetable_description': 'At 00:00', 'max_active_tasks': 16, 'max_active_runs': 16, 'has_task_concurrency_limits': False, 'has_import_errors': False, 'next_dagrun': DateTime(2024, 11, 26, 0, 0, 0, tzinfo=Timezone('UTC')), 'next_dagrun_data_interval_start': DateTime(2024, 11, 26, 0, 0, 0, tzinfo=Timezone('UTC')), 'next_dagrun_data_interval_end': DateTime(2024, 11, 27, 0, 0, 0, tzinfo=Timezone('UTC')), 'next_dagrun_create_after': DateTime(2024, 11, 27, 0, 0, 0, tzinfo=Timezone('UTC'))}]
+(Background on this error at: https://sqlalche.me/e/14/gkpj) (Background on this error at: https://sqlalche.me/e/14/7s2a)
+[2024-11-27T04:00:26.561+0000] {processor.py:157} INFO - Started process (PID=219) to work on /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T04:00:26.561+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/openbrewery_dag_.py for tasks to queue
+[2024-11-27T04:00:26.562+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:00:26.562+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T04:00:26.988+0000] {processor.py:839} INFO - DAG(s) dict_keys(['brewery_bronze_layer']) retrieved from /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T04:00:26.998+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:00:26.997+0000] {dag.py:2915} INFO - Sync 1 DAGs
+[2024-11-27T04:00:27.015+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:00:27.015+0000] {dag.py:3696} INFO - Setting next_dagrun for brewery_bronze_layer to 2024-11-26T00:00:00+00:00, run_after=2024-11-27T00:00:00+00:00
+[2024-11-27T04:00:27.030+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/openbrewery_dag_.py took 0.472 seconds
+[2024-11-27T04:00:57.594+0000] {processor.py:157} INFO - Started process (PID=236) to work on /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T04:00:57.595+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/openbrewery_dag_.py for tasks to queue
+[2024-11-27T04:00:57.596+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:00:57.595+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T04:00:57.847+0000] {processor.py:839} INFO - DAG(s) dict_keys(['brewery_bronze_layer']) retrieved from /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T04:00:57.925+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:00:57.925+0000] {security.py:708} INFO - Not syncing DAG-level permissions for DAG 'DAG:brewery_bronze_layer' as access control is unset.
+[2024-11-27T04:00:57.925+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:00:57.925+0000] {dag.py:2915} INFO - Sync 1 DAGs
+[2024-11-27T04:00:57.942+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:00:57.942+0000] {dag.py:3696} INFO - Setting next_dagrun for brewery_bronze_layer to 2024-11-26T00:00:00+00:00, run_after=2024-11-27T00:00:00+00:00
+[2024-11-27T04:00:57.957+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/openbrewery_dag_.py took 0.365 seconds
+[2024-11-27T04:01:28.052+0000] {processor.py:157} INFO - Started process (PID=246) to work on /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T04:01:28.054+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/openbrewery_dag_.py for tasks to queue
+[2024-11-27T04:01:28.055+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:01:28.055+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T04:01:28.692+0000] {processor.py:839} INFO - DAG(s) dict_keys(['brewery_bronze_layer']) retrieved from /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T04:01:28.703+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:01:28.702+0000] {dag.py:2915} INFO - Sync 1 DAGs
+[2024-11-27T04:01:28.724+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:01:28.724+0000] {dag.py:3696} INFO - Setting next_dagrun for brewery_bronze_layer to 2024-11-26T00:00:00+00:00, run_after=2024-11-27T00:00:00+00:00
+[2024-11-27T04:01:28.737+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/openbrewery_dag_.py took 0.693 seconds
+[2024-11-27T04:01:59.703+0000] {processor.py:157} INFO - Started process (PID=263) to work on /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T04:01:59.704+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/openbrewery_dag_.py for tasks to queue
+[2024-11-27T04:01:59.704+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:01:59.704+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T04:01:59.969+0000] {processor.py:839} INFO - DAG(s) dict_keys(['brewery_bronze_layer']) retrieved from /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T04:02:00.048+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:02:00.048+0000] {security.py:708} INFO - Not syncing DAG-level permissions for DAG 'DAG:brewery_bronze_layer' as access control is unset.
+[2024-11-27T04:02:00.049+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:02:00.049+0000] {dag.py:2915} INFO - Sync 1 DAGs
+[2024-11-27T04:02:00.064+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:02:00.064+0000] {dag.py:3696} INFO - Setting next_dagrun for brewery_bronze_layer to 2024-11-26T00:00:00+00:00, run_after=2024-11-27T00:00:00+00:00
+[2024-11-27T04:02:00.079+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/openbrewery_dag_.py took 0.379 seconds
+[2024-11-27T04:02:30.260+0000] {processor.py:157} INFO - Started process (PID=280) to work on /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T04:02:30.261+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/openbrewery_dag_.py for tasks to queue
+[2024-11-27T04:02:30.262+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:02:30.261+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T04:02:30.471+0000] {processor.py:839} INFO - DAG(s) dict_keys(['brewery_bronze_layer']) retrieved from /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T04:02:30.489+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:02:30.489+0000] {dag.py:2915} INFO - Sync 1 DAGs
+[2024-11-27T04:02:30.504+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:02:30.504+0000] {dag.py:3696} INFO - Setting next_dagrun for brewery_bronze_layer to 2024-11-26T00:00:00+00:00, run_after=2024-11-27T00:00:00+00:00
+[2024-11-27T04:02:30.515+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/openbrewery_dag_.py took 0.257 seconds
+[2024-11-27T04:03:00.733+0000] {processor.py:157} INFO - Started process (PID=298) to work on /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T04:03:00.734+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/openbrewery_dag_.py for tasks to queue
+[2024-11-27T04:03:00.735+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:03:00.734+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T04:03:00.983+0000] {processor.py:839} INFO - DAG(s) dict_keys(['brewery_bronze_layer']) retrieved from /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T04:03:00.992+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:03:00.992+0000] {dag.py:2915} INFO - Sync 1 DAGs
+[2024-11-27T04:03:01.009+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:03:01.008+0000] {dag.py:3696} INFO - Setting next_dagrun for brewery_bronze_layer to 2024-11-26T00:00:00+00:00, run_after=2024-11-27T00:00:00+00:00
+[2024-11-27T04:03:01.021+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/openbrewery_dag_.py took 0.291 seconds
+[2024-11-27T04:03:31.829+0000] {processor.py:157} INFO - Started process (PID=315) to work on /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T04:03:31.830+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/openbrewery_dag_.py for tasks to queue
+[2024-11-27T04:03:31.831+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:03:31.830+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T04:03:31.916+0000] {processor.py:839} INFO - DAG(s) dict_keys(['brewery_bronze_layer']) retrieved from /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T04:03:31.996+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:03:31.995+0000] {security.py:708} INFO - Not syncing DAG-level permissions for DAG 'DAG:brewery_bronze_layer' as access control is unset.
+[2024-11-27T04:03:31.996+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:03:31.996+0000] {dag.py:2915} INFO - Sync 1 DAGs
+[2024-11-27T04:03:32.012+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:03:32.012+0000] {dag.py:3696} INFO - Setting next_dagrun for brewery_bronze_layer to 2024-11-26T00:00:00+00:00, run_after=2024-11-27T00:00:00+00:00
+[2024-11-27T04:03:32.026+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/openbrewery_dag_.py took 0.200 seconds
+[2024-11-27T04:04:02.722+0000] {processor.py:157} INFO - Started process (PID=332) to work on /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T04:04:02.723+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/openbrewery_dag_.py for tasks to queue
+[2024-11-27T04:04:02.724+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:04:02.724+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T04:04:02.812+0000] {processor.py:839} INFO - DAG(s) dict_keys(['brewery_bronze_layer']) retrieved from /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T04:04:02.834+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:04:02.833+0000] {dag.py:2915} INFO - Sync 1 DAGs
+[2024-11-27T04:04:02.852+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:04:02.852+0000] {dag.py:3696} INFO - Setting next_dagrun for brewery_bronze_layer to 2024-11-26T00:00:00+00:00, run_after=2024-11-27T00:00:00+00:00
+[2024-11-27T04:04:02.865+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/openbrewery_dag_.py took 0.146 seconds
+[2024-11-27T04:04:33.076+0000] {processor.py:157} INFO - Started process (PID=349) to work on /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T04:04:33.077+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/openbrewery_dag_.py for tasks to queue
+[2024-11-27T04:04:33.078+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:04:33.078+0000] {dagbag.py:539} INFO - Filling up the DagBag from /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T04:04:33.170+0000] {processor.py:839} INFO - DAG(s) dict_keys(['brewery_bronze_layer']) retrieved from /opt/airflow/dags/openbrewery_dag_.py
+[2024-11-27T04:04:33.180+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:04:33.180+0000] {dag.py:2915} INFO - Sync 1 DAGs
+[2024-11-27T04:04:33.201+0000] {logging_mixin.py:151} INFO - [2024-11-27T04:04:33.201+0000] {dag.py:3696} INFO - Setting next_dagrun for brewery_bronze_layer to 2024-11-26T00:00:00+00:00, run_after=2024-11-27T00:00:00+00:00
+[2024-11-27T04:04:33.216+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/openbrewery_dag_.py took 0.143 seconds
