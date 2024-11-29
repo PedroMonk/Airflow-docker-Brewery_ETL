@@ -134,36 +134,6 @@ def validate_longitude(lon: Any) -> bool:
 # Register UDF for longitude validation
 validate_longitude_udf = udf(validate_longitude, BooleanType())
 
-PC
-siga a mesma ideia com essa função : 
-
-def extract_brewery_data(**kwargs) -> None:
-    """Função para extrair dados da API"""
-    logger.info("Iniciando a extração de dados da API")
-    data = []
-    num_breweries = 0
-
-    for i,page in enumerate(count(start=1)):
-        params = format_request_params(page=page, per_page=50)
-        batch = get_data(params=params)
-
-        if not batch:
-            logger.info(f"Parando a coleta de dados na página {page} devido a dados vazios.")
-            break
-
-        num_breweries += len(batch)
-        data.extend(batch)
-
-    # Passar os dados para a próxima task via XCom
-    kwargs['ti'].xcom_push(key='brewery_data', value=data)
-    logger.info(f"Extraídos dados de {num_breweries} cervejarias.")
-
-
-Here's the documented English version of the extract_brewery_data function for multiple pages:
-
-python
-
-Copy
 def extract_brewery_data(**kwargs) -> None:
     """
     Extracts brewery data from the Open Brewery DB API, iterating through all available pages.
