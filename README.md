@@ -114,7 +114,7 @@ Gold Layer
 Query Example ( first page )
 To query the aggregated data in the Gold layer using AWS Athena:
 ```
-sqlCopySELECT 
+SELECT 
     brewery_type,
     localizacao,
     quantity_of_breweries
