@@ -12,7 +12,7 @@ The module performs the following operations:
 4. Creates count metrics
 5. Partitions and stores data in the Gold layer
 
-Author: [Your Name]
+Author: [Pcosta]
 Date: November 2024
 """
 
